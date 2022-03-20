@@ -373,15 +373,7 @@ export function getUtils({
 
     let defaultLocale = i18n.defaultLocale
     let detectedLocale = detectLocaleCookie(req, i18n.locales)
-    let acceptPreferredLocale
-    try {
-      acceptPreferredLocale =
-        i18n.localeDetection !== false
-          ? acceptLanguage(req.headers['accept-language'], i18n.locales)
-          : detectedLocale
-    } catch (_) {
-      acceptPreferredLocale = detectedLocale
-    }
+    let acceptPreferredLocale = detectedLocale ? detectedLocale : defaultLocale
 
     const { host } = req.headers || {}
     // remove port from host and remove port if present
